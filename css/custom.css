@@ -1,0 +1,26 @@
+/* 文章页正文卡片 */
+.post-content {
+  background: linear-gradient(
+    135deg,
+    #f5f7fa,
+    #e4ecf5
+  ) !important;
+}
+
+/* 首页文章卡片 */
+.recent-post-item {
+  background: linear-gradient(
+    135deg,
+    #f5f7fa,
+    #e4ecf5
+  ) !important;
+}
+
+/* 侧边栏卡片 */
+.card-widget {
+  background: linear-gradient(
+    135deg,
+    #f5f7fa,
+    #e4ecf5
+  ) !important;
+}
