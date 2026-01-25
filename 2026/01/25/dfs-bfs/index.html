@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>初涉深度优先与广度优先搜索 | 精神明亮的人</title><meta name="author" content="Ypres / YP"><meta name="copyright" content="Ypres / YP"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="妈妈的，为什么图片加载不出来呢？明天再探索吧。 前言老实说，我从入学起就不断地在接触DFS与BFS的内容，但是直到如今，我才能大概说出这些知识点的主线。有的时候我感觉很矛盾，兴趣的推动或许能推动我探索学习，但是更容易导致浮光掠影，囫囵吞枣，所以每次我想去学习什么的时候，最后的结果也只是“体验到了学习的快感”，并没有真正掌握这些知识的内容，当我想回顾的时候，这些知识又早就被我忘掉了。所以就像我之前说">
+<meta property="og:type" content="website">
+<meta property="og:title" content="初涉深度优先与广度优先搜索">
+<meta property="og:url" content="https://ypreeeeeeeees.github.io/2026/01/25/dfs-bfs/index.html">
+<meta property="og:site_name" content="精神明亮的人">
+<meta property="og:description" content="妈妈的，为什么图片加载不出来呢？明天再探索吧。 前言老实说，我从入学起就不断地在接触DFS与BFS的内容，但是直到如今，我才能大概说出这些知识点的主线。有的时候我感觉很矛盾，兴趣的推动或许能推动我探索学习，但是更容易导致浮光掠影，囫囵吞枣，所以每次我想去学习什么的时候，最后的结果也只是“体验到了学习的快感”，并没有真正掌握这些知识的内容，当我想回顾的时候，这些知识又早就被我忘掉了。所以就像我之前说">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ypreeeeeeeees.github.io/image/como.jpg">
+<meta property="article:published_time" content="2026-01-25T13:58:10.000Z">
+<meta property="article:modified_time" content="2026-01-25T14:30:57.080Z">
+<meta property="article:author" content="Ypres &#x2F; YP">
+<meta property="article:tag" content="Ypres">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ypreeeeeeeees.github.io/image/como.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ypreeeeeeeees.github.io/2026/01/25/dfs-bfs/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '初涉深度优先与广度优先搜索',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: '算法笔记pt.6'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">精神明亮的人</span></a></span><div id="menus"></div></nav><div id="page-site-info"><h1 id="site-title">初涉深度优先与广度优先搜索</h1></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>妈妈的，为什么图片加载不出来呢？明天再探索吧。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>老实说，我从入学起就不断地在接触DFS与BFS的内容，但是直到如今，我才能大概说出这些知识点的主线。有的时候我感觉很矛盾，兴趣的推动或许能推动我探索学习，但是更容易导致浮光掠影，囫囵吞枣，所以每次我想去学习什么的时候，最后的结果也只是“体验到了学习的快感”，并没有真正掌握这些知识的内容，当我想回顾的时候，这些知识又早就被我忘掉了。所以就像我之前说的那样，我希望我对每一个知识点的理解落到实处，也就是要写笔记，不仅是记录自己的学习成果，更夸张点说，就算有一天自己忘掉了，也可以重新看一遍自己写的文章，至少不用再看一遍之前看过的视频，那样显得很丢人。</p>
+<h3 id="深度优先搜索（DFS）"><a href="#深度优先搜索（DFS）" class="headerlink" title="深度优先搜索（DFS）"></a>深度优先搜索（DFS）</h3><p>在我系统学习树和图的存储方法之前，深度优先搜索对我来说，就是一种更科学的，可以自己控制条件的枚举方式。事实上它也部分符合这个定义。比起枚举，它能够模拟“先走到底，再换路线”的方式，枚举所有可能性。<br>一个搜索，其本质也就是：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">114514</span>;</span><br><span class="line"><span class="type">int</span> n,a[N],b[N],path[N],used[N];</span><br><span class="line"></span><br><span class="line">空或<span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(参数)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(满足了退出条件)&#123;</span><br><span class="line">        分段输出或维护变量;</span><br><span class="line">        退出;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果不选</span></span><br><span class="line">    递归(在不选的条件下)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果选</span></span><br><span class="line">    <span class="comment">//需要思考在这里是for遍历还是直接递归</span></span><br><span class="line">    执行选的操作</span><br><span class="line">    递归(在选的条件下)</span><br><span class="line">    回溯操作</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    输入n和相应的数组内容</span><br><span class="line">    执行dfs和对应的参数</span><br><span class="line">    输出统一的在此处输出</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以目前我的需求来讲，DFS分为三种：子集，排列，二维，接下来我会对每一个部分做简要介绍。<br><strong>子集型</strong><br>引入：洛谷P2036 PERKET<br><img src="/.io//P2036.jpg"></p>
+<p>选了一个不是很若只的但是也不是很难的 ^^<br>可以得见，本题要求我们没有数量限制与顺序限制（不一定连续）地任意选配料，也就是要求我们选出它全部选项中最优的一个子集，这个就叫选子集的DFS形式。<br>首先，请我们用手自己比划一下，如果你想选完它所有的子集，你会怎么选？就我来讲，我会用左手大拇指按住第一个，右手食指开始点。一，一二，一三，一四，一五，一二三，一二四……一直到最后的五。除了顺序不同，其实这就和深度优先的步骤非常相似。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e5</span><span class="number">+10</span>;</span><br><span class="line"><span class="type">int</span> n,s[N],b[N],res;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">abs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> x&gt;<span class="number">0</span>?x:-x;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> ts,<span class="type">int</span> tb)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n &amp;&amp; !(ts == <span class="number">1</span> &amp;&amp; tb == <span class="number">0</span>))&#123;<span class="comment">//排除空集</span></span><br><span class="line">        res=<span class="built_in">min</span>(res,<span class="built_in">abs</span>(ts-tb));</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//更新结果，一定要终止！要不然还得执行，居然还能执行，于是就死循环</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不选吗？</span></span><br><span class="line">    <span class="built_in">dfs</span>(x<span class="number">+1</span>,ts,tb);<span class="comment">//直接递归，然后这一项结束后会自动去递归选的结果</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//选吗？</span></span><br><span class="line">    ts*=s[x],tb+=b[x];<span class="comment">//先把这一项选上，按题逻辑就是乘酸加苦</span></span><br><span class="line">    <span class="built_in">dfs</span>(x<span class="number">+1</span>,ts,tb);<span class="comment">//然后递归</span></span><br><span class="line">    ts/=s[x],tb-=b[x];<span class="comment">//然后回溯</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)cin&gt;&gt;s[i]&gt;&gt;b[i];</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>);<span class="comment">//带着参数去，这里带着的参数是选到的地方，临时的酸度和苦度</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>值得一提的是，在这里所选的子集实际上并不是只对他们执行“选”的操作，实际上在每一个子集中，每一个数字都会被执行一次操作，没有被选上的只是被执行了“不选”，比如选一三，实际操作它就是递归中一个“是否是否否”的分支。它和全排列的区别就是它可以有不选的权利。<br>(全)排列型<br>P1706：全排列问题：给定n，输出从1到n所有整数的排列组合。<br>与上面相比，这个题就不存在不选的可能性了。但是该怎么确定选定的数字是不重复的？这里给出的方法是用used数组来完成操作。实际上这里的回溯就是改变used的值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">20</span>;</span><br><span class="line"><span class="type">int</span> n,used[N],path[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>,path[i]);<span class="comment">//path用于存储已选过的数字，但是和used没关系。</span></span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;<span class="comment">//要记得退出哦</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!used[i])&#123;</span><br><span class="line">            used[i]=<span class="literal">true</span>;</span><br><span class="line">            path[x]=i;</span><br><span class="line">            <span class="built_in">dfs</span>(x<span class="number">+1</span>);</span><br><span class="line">            used[i]=<span class="literal">false</span>;<span class="comment">//回溯。但是path不用改变，就当垃圾值了，后面还会覆盖</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>P1219 八皇后问题<br><img src="/.io//P1219.jpg"></p>
+<p>花了一天多从完全不懂到一遍过，嘻嘻<br>实际上蓝桥C&#x2F;C++省A的第二题大多数都是由这个模板进化而来了。比如上一届考了一个不能连三个的，还有前面五子棋的，都是这个思路。相比单纯的枚举，dfs的优势在于它的限定条件是严格按照题目给定的，逻辑也比较清晰。其中if( r[i] || dg[x+i] || udg[(x-i+n)] ) continue; 这段根据题目条件设定限制条件的语句就是剪枝，可以优化速度。（没有听起来那么高级）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">20</span>;</span><br><span class="line"><span class="type">int</span> n,path[N],res,cnt;</span><br><span class="line"><span class="type">bool</span> r[N],dg[N],udg[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cnt&lt;<span class="number">3</span>)&#123;  <span class="comment">//输出要求字典序前三个结果，其实原来我if就写了一整行，结果调好久</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,path[i]);   </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        res++,cnt++; <span class="comment">//本题要求输出总方案数</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//i是列 x是行</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;<span class="comment">//本题是N&gt;=1，就从第一列开始算</span></span><br><span class="line">        <span class="keyword">if</span>(r[i] || dg[x+i] || udg[(x-i+n)])<span class="keyword">continue</span>; <span class="comment">// 如果同一列，同一正反对角线有棋子就退出这一步</span></span><br><span class="line">        r[i]=dg[x+i]=udg[x-i+n]=<span class="literal">true</span>;  <span class="comment">//放下的操作，标记</span></span><br><span class="line">        path[x] = i; <span class="comment">//记录当前放置的行列</span></span><br><span class="line">        <span class="built_in">dfs</span>(x<span class="number">+1</span>); <span class="comment">//递归下一行</span></span><br><span class="line">        r[i]=dg[x+i]=udg[x-i+n]=<span class="literal">false</span>; <span class="comment">//回溯，这一行执行之后可以无伤进入下一列的放置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">0</span>); <span class="comment">//这里x指的是目前选到第几行，如果是1，就意味着忽略了第一行的放置</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>关于正对角线和反对角线，正对角线是右上对左下，反对角线是左上到右下，他们这个坐标表示是规律总结的，具体来说，也就是同一正对角线上的点横坐标和纵坐标和总是相等，同一反对角线就是差相等。但是差会是负数，所以需要加n，就必然是同一个正数了。<br>两者的尺寸本应均是棋盘n的最大值的两倍最稳妥，但是这题数据比较小，N开的大，就过了。标准上应该是2*N。<br><strong>二维型（棋盘型）</strong><br>有人会说，前面八皇后就不是棋盘了吗？其实不是，它只是背景借用了棋盘，实际代码里也没有棋盘的事情啊。真正的二维dfs一般就是求从某地到达某地的路径数，和前面还是有区别的。<br>P1605 迷宫</p>
+<p><img src="/.io//P1605.jpg"></p>
+<p>这个题和 P1002过河卒 虽然比较像的吧，但是两者在处理方法上有本质的不同，一个dfs一个dp，主要是因为P1002用dfs会超时。（说了一段没用的话呢。）<br>搜索题的本质其实就是找到递归终点并明白怎么进行枚举，在本题中也就是终点从一维数组的末尾变成了二维的一个点罢了。除此之外，由于本题中可以向四个方向进行递归，所以怎么去表示这四个方向同样也是值得学习的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">20</span>;</span><br><span class="line"><span class="type">int</span> g[N][N],n,m,t,sx,sy,fx,fy;</span><br><span class="line"><span class="type">int</span> res,dir[<span class="number">5</span>]=&#123;<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;<span class="comment">//这里其实也可以变成dx，dy两个数组，然后在四个方向上分别调用</span></span><br><span class="line"><span class="type">bool</span> visited[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==fx &amp;&amp; y==fy)&#123;</span><br><span class="line">        res++; <span class="comment">//如果到达终点</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;<span class="number">4</span>;k++)&#123;</span><br><span class="line">        <span class="type">int</span> dx=x+dir[k],dy=y+dir[k<span class="number">+1</span>];</span><br><span class="line">        <span class="keyword">if</span>(dx&gt;<span class="number">0</span> &amp;&amp; dx&lt;=n &amp;&amp; dy&gt;<span class="number">0</span> &amp;&amp; dy&lt;=m &amp;&amp; g[dx][dy] != <span class="number">-1</span> &amp;&amp; !visited[dx][dy])&#123;  <span class="comment">//如果满足如上条件就可以走</span></span><br><span class="line">            visited[dx][dy] = <span class="literal">true</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(dx,dy);</span><br><span class="line">            visited[dx][dy] = <span class="literal">false</span>;<span class="comment">//回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;t;</span><br><span class="line">    cin&gt;&gt;sx&gt;&gt;sy&gt;&gt;fx&gt;&gt;fy;</span><br><span class="line">    <span class="keyword">while</span>(t --)&#123;</span><br><span class="line">        <span class="type">int</span> x,y;</span><br><span class="line">        cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">        g[x][y] = <span class="number">-1</span>; <span class="comment">//标记不能过的点，全局变量下所有元素是0.</span></span><br><span class="line">    &#125;</span><br><span class="line">    visited[sx][sy] = <span class="number">1</span>;<span class="comment">//起点固定是已访问的，总不能再回去吧。</span></span><br><span class="line">    <span class="built_in">dfs</span>(sx,sy); <span class="comment">//从起点开始递归</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>这个知识点总体来讲还需要结合学习树和图的存储来用，不过学会这些就可以解决很多问题了。<br>广度优先搜索（BFS）<br>如果深度优先搜索用的是栈（递归）来解决，那么广度优先用的就是队列。我们都知道BFS的搜索方式是一层一层扩散的，这其中实现“一层一层”就是用的把一层的每一个点推入队列，然后延伸计算。<br>同样，我们也可以写出一个类似的伪代码当作模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;utility&gt;</span>  <span class="comment">//我们就不手动实现队列了哈</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> n,m,d[N][N]; <span class="comment">//d指的是每个点对起点的距离</span></span><br><span class="line">向上下左右/某个方向 移动的方向数组</span><br><span class="line">queue&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; q; 也就是存放临时点的队列</span><br><span class="line">还可以创建不能走的点的队列，或者多起点问题下的起点队列</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    先推入起点（要是多起点问题就直接开始了）</span><br><span class="line">    起点的距离值为<span class="number">0</span></span><br><span class="line">    当队列不为空时：</span><br><span class="line">    <span class="keyword">for</span>循环结合方向数组探索能走的点；</span><br><span class="line">    如果能走，这个点离起点的距离等于它上一个点++；</span><br><span class="line">    把新的能走点推进去，结束；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    传入棋盘大小</span><br><span class="line">    推入不能走的点/起点/终点</span><br><span class="line">    <span class="built_in">bfs</span>();</span><br><span class="line">    统一输出结果</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>单起点问题<br>P1443 马的遍历<br><img src="/.io//P1443.jpg"><br>没找到比它还基础的，或者说我没认真找罢<br>本题值得注意的一个点是——马的运动方式和人是不一样的。其他的就是练手模板。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">410</span>;</span><br><span class="line"><span class="type">int</span> n,m,x,y;</span><br><span class="line"><span class="type">int</span> d[N][N];</span><br><span class="line"><span class="type">int</span> dix[<span class="number">8</span>]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">-2</span>,<span class="number">-2</span>&#125;;</span><br><span class="line"><span class="type">int</span> diy[<span class="number">8</span>]=&#123;<span class="number">2</span>,<span class="number">-2</span>,<span class="number">2</span>,<span class="number">-2</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">-1</span>&#125;; <span class="comment">//这是马的运动方法</span></span><br><span class="line">queue&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    q.<span class="built_in">push</span>(&#123;x,y&#125;);<span class="comment">//推入起点</span></span><br><span class="line">    d[x][y] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="keyword">auto</span> t=q.<span class="built_in">front</span>();</span><br><span class="line">        <span class="type">int</span> xx=t.first,yy=t.second; <span class="comment">//取点，标记，删点，一个不能少，尤其是删点就死循环</span></span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;<span class="number">7</span>;k++)&#123;</span><br><span class="line">            <span class="type">int</span> dx=xx+dix[k],dy=yy+diy[k];</span><br><span class="line">            <span class="keyword">if</span>(dx&gt;<span class="number">0</span> &amp;&amp; dx&lt;=n &amp;&amp; dy&gt;<span class="number">0</span> &amp;&amp; dy&lt;=m &amp;&amp; d[dx][dy] == <span class="number">-1</span>)&#123;</span><br><span class="line">                d[dx][dy] = d[xx][yy]<span class="number">+1</span>; <span class="comment">//标记距离固定比它上一个点大一</span></span><br><span class="line">                q.<span class="built_in">push</span>(&#123;dx,dy&#125;);<span class="comment">//要推入新的点</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    <span class="built_in">memset</span>(d,<span class="number">-1</span>,<span class="keyword">sizeof</span> d); <span class="comment">//棋盘初始化 重要！！因为0是有意义的</span></span><br><span class="line">    <span class="built_in">bfs</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,d[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>多起点问题<br>P1332 血色先锋队<br><img src="/.io//P1332.jpg"><br>看题面真乐了<br>多起点其实和前一个题没有什么本质的区别，也就是起点需要先推到队列里罢了。注意这里要求碰到输出领主的最短时间，实际上第一个碰到的就是最短时间，所以剪枝的时候就是访问过的不能走就行。</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;queue&gt;
+#include&lt;cstring&gt;
+
+using namespace std;
+
+const int N=510;
+int n,m,a,b;
+int d[N][N],dir[5]={-1,0,1,0,-1};
+queue&lt;pair&lt;int,int&gt; &gt; q;
+queue&lt;pair&lt;int,int&gt; &gt; l;
+
+
+void bfs(){
+    while(!q.empty()){
+        auto t=q.front();
+        int i=t.first,j=t.second;
+        q.pop(); //要删点噢
+        for(int k=0;k&lt;4;k++){
+            int dx=i+dir[k],dy=j+dir[k+1];
+            if(dx&gt;0 &amp;&amp; dx&lt;=n &amp;&amp; dy&gt;0 &amp;&amp; dy&lt;=m &amp;&amp; d[dx][dy] == -1){ //是的，加上d[dx][dy] != -1是可以的
+                d[dx][dy] = d[i][j]+1;
+                q.push({dx,dy});
+            }
+        }
+    }
+}
+
+void push(){
+    while(!l.empty()){
+        auto t=l.front();
+        int i=t.first,j=t.second;  //这里就是领主的点要多次输出，就用一个push比较简洁。
+        printf(&quot;%d\n&quot;,d[i][j]);
+        l.pop();
+    }
+}
+
+int main(){
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;a&gt;&gt;b;
+    memset(d,-1,sizeof d); //要初始化噢
+    while(a --){
+        int x,y;
+        cin&gt;&gt;x&gt;&gt;y;
+        d[x][y] = 0;
+        q.push({x,y});
+    }
+    while(b --){
+        int x,y;
+        cin&gt;&gt;x&gt;&gt;y;
+        l.push({x,y});
+    }
+    bfs();
+    push();
+    return 0;//看着自己以前望而却步的题目现在一遍过 真的很有成就感 
+}
+ 
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ypreeeeeeeees.github.io">Ypres / YP</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ypreeeeeeeees.github.io/2026/01/25/dfs-bfs/">https://ypreeeeeeeees.github.io/2026/01/25/dfs-bfs/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ypreeeeeeeees.github.io" target="_blank">精神明亮的人</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/image/como.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav id="pagination"><div class="pagination"></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ypres / YP</div><div class="author-info-description">计算机科学与技术·大一</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ypreeeeeeeees"><i class="fab fa-github"></i><span>关注我的github！</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无论您从哪里来到这个网站，感谢您的时间，让我们共同进步！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/25/dfs-bfs/" title="初涉深度优先与广度优先搜索">初涉深度优先与广度优先搜索</a><time datetime="2026-01-25T13:58:10.000Z" title="发表于 2026-01-25 21:58:10">2026-01-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/24/%E9%AB%98%E7%B2%BE%E5%BA%A6%E4%B9%98%E6%B3%95%E4%B8%8E%E5%8A%A0%E6%B3%95/" title="高精度乘法与加法背板">高精度乘法与加法背板</a><time datetime="2026-01-24T09:52:39.000Z" title="发表于 2026-01-24 17:52:39">2026-01-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/21/26-1-21/" title="26-1-21">26-1-21</a><time datetime="2026-01-21T03:10:58.000Z" title="发表于 2026-01-21 11:10:58">2026-01-21</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">3</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-25T14:31:12.681Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Ypres / YP</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4-b1"></script><script src="/js/main.js?v=5.5.4-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
