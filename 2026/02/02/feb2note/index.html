@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2.2总结 | 精神明亮的人</title><meta name="author" content="Ypres / YP"><meta name="copyright" content="Ypres / YP"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="刚放假的时候找到的洛谷上有个“蓝桥省一秘籍”的题单，感觉挺好，目前就着手写这个了。实际上现在最主要练的除了基础的模拟前缀和差分什么的，也就是搜索和dp，当然我只能报A组的情况下，最后一定会出现一堆我根本没见过的数学题几何题，这定理那定理，哈哈，到时候就暴力，没办法就输出个样例，还能得3分呢。 还有线性dp的笔记没写，安排到之后写，但是越来越感觉学新知识点没啥用。尤其是那些图论的什么最短路生成树，到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.2总结">
+<meta property="og:url" content="https://ypreeeeeeeees.github.io/2026/02/02/feb2note/index.html">
+<meta property="og:site_name" content="精神明亮的人">
+<meta property="og:description" content="刚放假的时候找到的洛谷上有个“蓝桥省一秘籍”的题单，感觉挺好，目前就着手写这个了。实际上现在最主要练的除了基础的模拟前缀和差分什么的，也就是搜索和dp，当然我只能报A组的情况下，最后一定会出现一堆我根本没见过的数学题几何题，这定理那定理，哈哈，到时候就暴力，没办法就输出个样例，还能得3分呢。 还有线性dp的笔记没写，安排到之后写，但是越来越感觉学新知识点没啥用。尤其是那些图论的什么最短路生成树，到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ypreeeeeeeees.github.io/image/avatar.jpg">
+<meta property="article:published_time" content="2026-02-02T06:01:28.000Z">
+<meta property="article:modified_time" content="2026-02-02T06:43:15.964Z">
+<meta property="article:author" content="Ypres &#x2F; YP">
+<meta property="article:tag" content="Ypres">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ypreeeeeeeees.github.io/image/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2.2总结",
+  "url": "https://ypreeeeeeeees.github.io/2026/02/02/feb2note/",
+  "image": "https://ypreeeeeeeees.github.io/image/avatar.jpg",
+  "datePublished": "2026-02-02T06:01:28.000Z",
+  "dateModified": "2026-02-02T06:43:15.964Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Ypres / YP",
+      "url": "https://ypreeeeeeeees.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ypreeeeeeeees.github.io/2026/02/02/feb2note/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2.2总结',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">精神明亮的人</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">2.2总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-02T06:01:28.000Z" title="发表于 2026-02-02 14:01:28">2026-02-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-02T06:43:15.964Z" title="更新于 2026-02-02 14:43:15">2026-02-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>刚放假的时候找到的洛谷上有个“蓝桥省一秘籍”的题单，感觉挺好，目前就着手写这个了。实际上现在最主要练的除了基础的模拟前缀和差分什么的，也就是搜索和dp，当然我只能报A组的情况下，最后一定会出现一堆我根本没见过的数学题几何题，这定理那定理，哈哈，到时候就暴力，没办法就输出个样例，还能得3分呢。</p>
+<p>还有线性dp的笔记没写，安排到之后写，但是越来越感觉学新知识点没啥用。尤其是那些图论的什么最短路生成树，到历年题里都不考😅纯爽自己一把呗</p>
+<h3 id="1-前缀和——区间同余问题"><a href="#1-前缀和——区间同余问题" class="headerlink" title="1.前缀和——区间同余问题"></a>1.前缀和——区间同余问题</h3><p>题源：P3131,P8649，以P8649为例；<br><img src="/image/feb2note/P8649.png"><br>首先我们能想到的办法是枚举所有起点终点，找出区间和为k倍的区间，那时间来到三次方，肯定是不行的。所以我们能想到前缀和，再枚举，就是平方，但是n可以是1e5，还是不行，所以只能找O(n)的方法。<br>这里需要用到同余定理。同余定理指的是两个数如果取模一个k的余数相同，那么他俩相减得到的一定是k的倍数。反过来说，如果他俩的差一定是k的倍数，那么他俩没减前余数一定相同。因此，我们的思路从求前缀和变成求前缀和mod k 的余数即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e5</span><span class="number">+10</span>;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> n,k,cnt[N],sum,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    cnt[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123; <span class="comment">//对于每一个点</span></span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        cin&gt;&gt;x;</span><br><span class="line">        sum=(sum+x)%k; <span class="comment">// 先求前缀和再mod，这个厉害连数组都不开了</span></span><br><span class="line">        ans+=cnt[sum]; <span class="comment">// 以这个i为终点，与前面每一个同余的点都可以是一个区间，所以直接加</span></span><br><span class="line">        cnt[sum]++; <span class="comment">// 把自己加上，之后同余的也可以以自己为起点</span></span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外的那个题求的是最大区间长度，就需要用两个数组存储一下，注意保留第一个相应余数出现的地方。</p>
+<h3 id="2-搜索——二维字符串匹配问题"><a href="#2-搜索——二维字符串匹配问题" class="headerlink" title="2.搜索——二维字符串匹配问题"></a>2.搜索——二维字符串匹配问题</h3><p>P1101，然后接着做的填涂颜色，但是那个是多源bfs算是经典的题目，（居然我还没一遍过），就不放了。<br><img src="/image/feb2note/P1101.png"><br>在这个题中，GPT老师早早的就猜到了我要用bfs，不过bfs显然是不对的，因为bfs会拐弯，如果要保持一个方向还得多传参，明显不是最好的方法。<br>其实我觉得这种问题不应该跟bfs和dfs放一起，最好是和kmp那种一维字符串匹配放一起。实际上这个题的方法放在一维就是朴素字符串匹配，只不过变成二维之后高级了一点。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">110</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> g[N][N];</span><br><span class="line"><span class="type">int</span> dix[<span class="number">8</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">int</span> diy[<span class="number">8</span>] = &#123;<span class="number">1</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">bool</span> st[N][N];</span><br><span class="line">queue&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; s;</span><br><span class="line">string str=<span class="string">&quot;yizhong&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">7</span>;i++)&#123;</span><br><span class="line">        <span class="type">int</span> dx=x+i*dix[d],dy=y+i*diy[d];</span><br><span class="line">        <span class="keyword">if</span>(dx&lt;=<span class="number">0</span> || dx&gt;n || dy&lt;=<span class="number">0</span> || dy&gt;n ||g[dx][dy]!=str[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="comment">// 按位匹配，但凡中间有不对的就说不对，然后直接退出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">            cin&gt;&gt;g[i][j];</span><br><span class="line">            <span class="keyword">if</span>(g[i][j] == <span class="string">&#x27;y&#x27;</span>) s.<span class="built_in">push</span>(&#123;i,j&#125;);<span class="comment">//多源起点，推入队列</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!s.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="keyword">auto</span> t=s.<span class="built_in">front</span>();</span><br><span class="line">        s.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="type">int</span> x=t.first,y=t.second;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;<span class="number">8</span>;k++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">solve</span>(x,y,k))&#123; <span class="comment">//如果确实匹配</span></span><br><span class="line">                st[x][y] = <span class="literal">true</span>; <span class="comment">//这里起点特判了，实际上应该融合进逻辑的</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">7</span>;i++)&#123; <span class="comment">//好像不加起点特判也没事</span></span><br><span class="line">                    st[x+i*dix[k]][y+i*diy[k]] = <span class="literal">true</span>;<span class="comment">//允许输出</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[i][j]) <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,g[i][j]); <span class="comment">//如果允许输出就输出</span></span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);<span class="comment">//不行就打星号</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目前的做题方式是给GPT老师严格的提示词，让他不要一次出答案，然后给我透露思路，代码部分都是我自己完成，它负责给我debug和提供思路。没办法，不这样做不下去。之后我再慢慢脱离这种模式。<br>这些题明天再来一遍，然后继续往下写。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ypreeeeeeeees.github.io">Ypres / YP</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ypreeeeeeeees.github.io/2026/02/02/feb2note/">https://ypreeeeeeeees.github.io/2026/02/02/feb2note/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ypreeeeeeeees.github.io" target="_blank">精神明亮的人</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/image/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/31/backpack/" title="算法笔记Pt.8 三类背包问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">算法笔记Pt.8 三类背包问题</div></div><div class="info-2"><div class="info-item-1">不太想放图了，这类背包问题的思路其实很简单。y老师在直播回放里提到他原来讲过背包九讲，今天看完课搜了一下，2018年的视频，看着当时评论和弹幕环境我十分感慨，这个圈子真是人才济济，从来不缺年轻而富有激情的人，我真是选对行了。 背包问题是算法基础课中dp的开端，主要分为01背包，完全背包，多重背包问题。从此处开始，代码模板就失去了其意义，主要是这个问题产生的代码模板都只是简单的循环与输入输出，但是其中蕴含的思想丝毫不输其他部分，所以更多篇幅要花在写思路上。 背包问题的思路我记得在之前我在oj啊洛谷啊这些平台随意乱转的时候，曾经看过这类背包题目。当时我的思路是：重构排序顺序为选出最有性价比的物品放在前面，然后从上往下一个一个装。结果很明显，样例都过不了。显然贪心只能算出当前局部的最优解，而不是全局的最优解。后来我又想到深搜，子集dfs嘛，但是时间复杂度明显来到了阶乘级别，基本上寸步难行。这个时候我们的dp就来了。接下来的内容信息熵极低，如您比较聪明就不要浪费时间了^^ 什么是dp？简单说：DP 是一种「把复杂大问题拆成若干个简单小问题，通过解决小问题的最优解，推导出大问题最优解」的算...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ypres / YP</div><div class="author-info-description">计算机科学与技术·大一</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ypreeeeeeeees"><i class="fab fa-github"></i><span>关注我的github！</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无论您从哪里来到这个网站，感谢您的时间，让我们共同进步！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E7%BC%80%E5%92%8C%E2%80%94%E2%80%94%E5%8C%BA%E9%97%B4%E5%90%8C%E4%BD%99%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">1.前缀和——区间同余问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%90%9C%E7%B4%A2%E2%80%94%E2%80%94%E4%BA%8C%E7%BB%B4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">2.搜索——二维字符串匹配问题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/02/feb2note/" title="2.2总结">2.2总结</a><time datetime="2026-02-02T06:01:28.000Z" title="发表于 2026-02-02 14:01:28">2026-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/31/backpack/" title="算法笔记Pt.8 三类背包问题">算法笔记Pt.8 三类背包问题</a><time datetime="2026-01-31T02:04:37.000Z" title="发表于 2026-01-31 10:04:37">2026-01-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/27/graph-dijk/" title="算法笔记Pt.7 图的遍历，单源最短路算法与最小生成树">算法笔记Pt.7 图的遍历，单源最短路算法与最小生成树</a><time datetime="2026-01-27T07:16:51.000Z" title="发表于 2026-01-27 15:16:51">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/25/dfs-bfs/" title="算法笔记pt.6. 初涉深度优先与广度优先搜索">算法笔记pt.6. 初涉深度优先与广度优先搜索</a><time datetime="2026-01-25T13:58:10.000Z" title="发表于 2026-01-25 21:58:10">2026-01-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/24/%E9%AB%98%E7%B2%BE%E5%BA%A6%E4%B9%98%E6%B3%95%E4%B8%8E%E5%8A%A0%E6%B3%95/" title="高精度乘法与加法背板">高精度乘法与加法背板</a><time datetime="2026-01-24T09:52:39.000Z" title="发表于 2026-01-24 17:52:39">2026-01-24</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Ypres / YP</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4-b1"></script><script src="/js/main.js?v=5.5.4-b1"></script><div class="js-pjax"></div><script src="/js/rand-top.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
