@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2.3总结 | 精神明亮的人</title><meta name="author" content="Ypres / YP"><meta name="copyright" content="Ypres / YP"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="我的初步计划是写到这周五。因为这周结束后就是小年了。 dfs及其剪枝P1135，P9241，P10386.这里面P9241的思路比较清奇，尤其是把这个时间问题变成dfs飞机的顺序的问题的推导。首先，这个清奇的思路是怎么形成的？如果本题是一次询问的话，我们或许就可以展开时间轴，用差分的方法，把每一次飞机占用的时间都标出来就好了。但是这个题不行，因为飞机的降落时间是随机的，也就是它是一个固定的区间，但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.3总结">
+<meta property="og:url" content="https://ypreeeeeeeees.github.io/2026/02/03/feb3note/index.html">
+<meta property="og:site_name" content="精神明亮的人">
+<meta property="og:description" content="我的初步计划是写到这周五。因为这周结束后就是小年了。 dfs及其剪枝P1135，P9241，P10386.这里面P9241的思路比较清奇，尤其是把这个时间问题变成dfs飞机的顺序的问题的推导。首先，这个清奇的思路是怎么形成的？如果本题是一次询问的话，我们或许就可以展开时间轴，用差分的方法，把每一次飞机占用的时间都标出来就好了。但是这个题不行，因为飞机的降落时间是随机的，也就是它是一个固定的区间，但">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ypreeeeeeeees.github.io/image/avatar.jpg">
+<meta property="article:published_time" content="2026-02-03T06:28:42.000Z">
+<meta property="article:modified_time" content="2026-02-03T07:17:28.369Z">
+<meta property="article:author" content="Ypres &#x2F; YP">
+<meta property="article:tag" content="Ypres">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ypreeeeeeeees.github.io/image/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2.3总结",
+  "url": "https://ypreeeeeeeees.github.io/2026/02/03/feb3note/",
+  "image": "https://ypreeeeeeeees.github.io/image/avatar.jpg",
+  "datePublished": "2026-02-03T06:28:42.000Z",
+  "dateModified": "2026-02-03T07:17:28.369Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Ypres / YP",
+      "url": "https://ypreeeeeeeees.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ypreeeeeeeees.github.io/2026/02/03/feb3note/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2.3总结',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">精神明亮的人</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">2.3总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-03T06:28:42.000Z" title="发表于 2026-02-03 14:28:42">2026-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-03T07:17:28.369Z" title="更新于 2026-02-03 15:17:28">2026-02-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>我的初步计划是写到这周五。因为这周结束后就是小年了。</p>
+<h3 id="dfs及其剪枝"><a href="#dfs及其剪枝" class="headerlink" title="dfs及其剪枝"></a>dfs及其剪枝</h3><p>P1135，P9241，P10386.<br>这里面P9241的思路比较清奇，尤其是把这个时间问题变成dfs飞机的顺序的问题的推导。<br><img src="/image/feb3note/P9241.png"><br>首先，这个清奇的思路是怎么形成的？如果本题是一次询问的话，我们或许就可以展开时间轴，用差分的方法，把每一次飞机占用的时间都标出来就好了。但是这个题不行，因为飞机的降落时间是随机的，也就是它是一个固定的区间，但是在什么时候降落是随意的，所以你在这个做法中看到的重复降落或许可以不是这样，所以这个方法就显得太麻烦不标准。反之，这个题中飞机的数量是极少的，如果用全排列dfs枚举飞机降落的顺序，然后再判断可不可以都降落，这样也是可以的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> t,n;</span><br><span class="line"><span class="type">int</span> ti[N],d[N],l[N];</span><br><span class="line"><span class="type">bool</span> used[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> cnt,<span class="type">int</span> ctime)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cnt == n)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(used[i])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="type">int</span> s=<span class="built_in">max</span>(ctime,ti[i]); <span class="comment">//这里判断的是飞机后到还是操场后空，求完全准备好的时间</span></span><br><span class="line">        <span class="keyword">if</span>(ti[i]+d[i]&gt;=s)&#123;</span><br><span class="line">            used[i] = <span class="literal">true</span>;<span class="comment">//表示已经排列好了这个</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">check</span>(cnt<span class="number">+1</span>,s+l[i])) <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//如果一路绿灯就行</span></span><br><span class="line">            used[i] = <span class="literal">false</span>;<span class="comment">//回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t --)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(used,<span class="literal">false</span>,<span class="keyword">sizeof</span> used);</span><br><span class="line">        <span class="built_in">memset</span>(ti,<span class="number">0</span>,<span class="keyword">sizeof</span> ti);</span><br><span class="line">        <span class="built_in">memset</span>(d,<span class="number">0</span>,<span class="keyword">sizeof</span> d); <span class="comment">//其实差分然后每次询问都清除所有数组是不是也可以</span></span><br><span class="line">        <span class="built_in">memset</span>(l,<span class="number">0</span>,<span class="keyword">sizeof</span> l);</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            cin&gt;&gt;ti[i]&gt;&gt;d[i]&gt;&gt;l[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(<span class="number">0</span>,<span class="number">0</span>))&#123; <span class="comment">//一个没选，从0开始</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外的两道题，同样可以用dfs（第一题可能不太适合，但是如果用dfs需要多次剪枝，练习价值高）。第一题需要经过三层剪枝——<strong>当前楼层越界吗？已有的步数超过最小步数了吗？以及到达某个楼层的当前步数大于之前到达的更短的步数了吗？</strong> 只有在这三个条件下都退出，才能做出本题。当然最短路问题好像更应该用bfs。<br>最后一题也就是24省A的五子棋，该题的剪枝是我最应该学习的，本题按照第一个题解来说，则是最原始的剪枝，因为棋盘有限，完全可以判断出所有的五子连珠的情况，就可以排除后算出结果。这是我<strong>目前</strong>最应该学的，也是<strong>最有可能拿到分</strong>的方法😭😭。</p>
+<h3 id="bfs——状态压缩"><a href="#bfs——状态压缩" class="headerlink" title="bfs——状态压缩"></a>bfs——状态压缩</h3><p>听过算法基础课的朋友们（或者没听过的也）知道，<strong>八数码问题</strong>是1-8和x在一个3x3的平面上随机排列，然后求把x和其相邻的元素经过多少次交换，能凑出12345678x的排列方式的题目，也知道这种题目的计算方法就是：把这个九宫格压缩成一个字符串，然后用bfs的方式向四个方向修改其x的那一位并记录步数，最后如果得到了那个目标字符串就退出输出步数。<br>那么您就会做P2040了！<br><img src="/image/feb3note/P2040.png"><br>这个题的难点在于既要用queue存储状态，又要用map存储访问信息，对我这种stl没有认真学过的人来说很容易犯错。所以stl也要认真学。想起去年九月份我就抱着知乎上的（链接）学，现在居然还是一知半解，比较汗颜。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">string ta=<span class="string">&quot;111111111&quot;</span>;</span><br><span class="line">queue&lt;pair&lt;string,<span class="type">int</span>&gt;&gt; q;</span><br><span class="line">map&lt;string,<span class="type">bool</span>&gt; vis;</span><br><span class="line">string beg;</span><br><span class="line"><span class="type">int</span> dir[<span class="number">4</span>] = &#123;<span class="number">-3</span>,<span class="number">3</span>,<span class="number">-1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    q.<span class="built_in">push</span>(&#123;beg,<span class="number">0</span>&#125;); <span class="comment">//存储起点的步数为0</span></span><br><span class="line">    vis[beg] = <span class="literal">true</span>;<span class="comment">//访问过</span></span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="keyword">auto</span> t=q.<span class="built_in">front</span>();</span><br><span class="line">        string cs=t.first; <span class="comment">//取点</span></span><br><span class="line">        <span class="type">int</span> cnt=t.second;</span><br><span class="line">        q.<span class="built_in">pop</span>();<span class="comment">//删点</span></span><br><span class="line">        <span class="keyword">if</span>(cs == ta) <span class="keyword">return</span> cnt; <span class="comment">//如果已经达到了就直接退出，输出的是第一次成功的步数</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)&#123;</span><br><span class="line">            string nx=cs; <span class="comment">//修改后的字符串，不能直接用cs哦</span></span><br><span class="line">            nx[i] = (nx[i] == <span class="string">&#x27;0&#x27;</span>?<span class="string">&#x27;1&#x27;</span>:<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;<span class="number">4</span>;k++)&#123;</span><br><span class="line">                <span class="type">int</span> s=i+dir[k];</span><br><span class="line">                <span class="keyword">if</span>(s&lt;<span class="number">0</span> || s&gt;=<span class="number">9</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(i%<span class="number">3</span> == <span class="number">0</span> &amp;&amp; dir[k] == <span class="number">-1</span>)<span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(i%<span class="number">3</span> == <span class="number">2</span> &amp;&amp; dir[k] == <span class="number">1</span>)<span class="keyword">continue</span>;</span><br><span class="line">                nx[s] = (nx[s] == <span class="string">&#x27;0&#x27;</span>?<span class="string">&#x27;1&#x27;</span>:<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125;<span class="comment">//上面三个if分别是最上不能上，最下不能下，最左不能左，最右不能右</span></span><br><span class="line">            <span class="keyword">if</span>(!vis[nx])&#123;</span><br><span class="line">                    q.<span class="built_in">push</span>(&#123;nx,cnt<span class="number">+1</span>&#125;);</span><br><span class="line">                    vis[nx] = <span class="literal">true</span>;<span class="comment">//推点要在没访问的情况下推，要不然就重复推点</span></span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)&#123;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        cin&gt;&gt;c;</span><br><span class="line">        beg+=c;<span class="comment">//很少遇到string的处理方法，值得学习</span></span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">bfs</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ypreeeeeeeees.github.io">Ypres / YP</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ypreeeeeeeees.github.io/2026/02/03/feb3note/">https://ypreeeeeeeees.github.io/2026/02/03/feb3note/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ypreeeeeeeees.github.io" target="_blank">精神明亮的人</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/image/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/02/feb2note/" title="2.2总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2.2总结</div></div><div class="info-2"><div class="info-item-1">刚放假的时候找到的洛谷上有个“蓝桥省一秘籍”的题单，感觉挺好，目前就着手写这个了。实际上现在最主要练的除了基础的模拟前缀和差分什么的，也就是搜索和dp，当然我只能报A组的情况下，最后一定会出现一堆我根本没见过的数学题几何题，这定理那定理，哈哈，到时候就暴力，没办法就输出个样例，还能得3分呢。 还有线性dp的笔记没写，安排到之后写，但是越来越感觉学新知识点没啥用。尤其是那些图论的什么最短路生成树，到历年题里都不考😅纯爽自己一把呗 1.前缀和——区间同余问题题源：P3131,P8649，以P8649为例；首先我们能想到的办法是枚举所有起点终点，找出区间和为k倍的区间，那时间来到三次方，肯定是不行的。所以我们能想到前缀和，再枚举，就是平方，但是n可以是1e5，还是不行，所以只能找O(n)的方法。这里需要用到同余定理。同余定理指的是两个数如果取模一个k的余数相同，那么他俩相减得到的一定是k的倍数。反过来说，如果他俩的差一定是k的倍数，那么他俩没减前余数一定相同。因此，我们的思路从求前缀和变成求前缀和mod k 的余数即可。 12345678910111213141516171819#i...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ypres / YP</div><div class="author-info-description">计算机科学与技术·大一</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ypreeeeeeeees"><i class="fab fa-github"></i><span>关注我的github！</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无论您从哪里来到这个网站，感谢您的时间，让我们共同进步！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#dfs%E5%8F%8A%E5%85%B6%E5%89%AA%E6%9E%9D"><span class="toc-number">1.</span> <span class="toc-text">dfs及其剪枝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bfs%E2%80%94%E2%80%94%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9"><span class="toc-number">2.</span> <span class="toc-text">bfs——状态压缩</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/03/feb3note/" title="2.3总结">2.3总结</a><time datetime="2026-02-03T06:28:42.000Z" title="发表于 2026-02-03 14:28:42">2026-02-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/02/feb2note/" title="2.2总结">2.2总结</a><time datetime="2026-02-02T06:01:28.000Z" title="发表于 2026-02-02 14:01:28">2026-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/31/backpack/" title="算法笔记Pt.8 三类背包问题">算法笔记Pt.8 三类背包问题</a><time datetime="2026-01-31T02:04:37.000Z" title="发表于 2026-01-31 10:04:37">2026-01-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/27/graph-dijk/" title="算法笔记Pt.7 图的遍历，单源最短路算法与最小生成树">算法笔记Pt.7 图的遍历，单源最短路算法与最小生成树</a><time datetime="2026-01-27T07:16:51.000Z" title="发表于 2026-01-27 15:16:51">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/25/dfs-bfs/" title="算法笔记pt.6. 初涉深度优先与广度优先搜索">算法笔记pt.6. 初涉深度优先与广度优先搜索</a><time datetime="2026-01-25T13:58:10.000Z" title="发表于 2026-01-25 21:58:10">2026-01-25</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Ypres / YP</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4-b1"></script><script src="/js/main.js?v=5.5.4-b1"></script><div class="js-pjax"></div><script src="/js/rand-top.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
